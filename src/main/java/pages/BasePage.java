@@ -17,10 +17,6 @@ public abstract class BasePage {
 
     }
 
-    public String getPageUrl() {
-        return pageUrl();
-    }
-
     protected abstract String pageUrl();
 
     public void waitUntilLoaded() {

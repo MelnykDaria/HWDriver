@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.regex.Pattern;
 
-public class HomePage extends BasePage
+public abstract class HomePage extends BasePage
 {
 
     private By writeLetterButton = By.cssSelector(".primary.compose");
@@ -24,16 +24,11 @@ public class HomePage extends BasePage
         pageUrl = "https://mail.ukr.net/desktop";
     }
 
-    @Override
-    protected String pageUrl() {
-        return null;
-    }
 
     public void clickWriteLetter() {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(writeLetterButton));
         driver.findElement(writeLetterButton).click();
     }
-
     public void writeLetter(String to, String subject, String body) {
         driver.findElement(toInput).sendKeys(to);
         driver.findElement(subjectInput).sendKeys(subject);
