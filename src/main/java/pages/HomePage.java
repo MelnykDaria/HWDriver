@@ -25,6 +25,7 @@ public class HomePage extends BasePage
     }
 
 
+
     public void clickWriteLetter() {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(writeLetterButton));
         driver.findElement(writeLetterButton).click();

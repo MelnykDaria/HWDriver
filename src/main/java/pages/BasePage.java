@@ -7,8 +7,8 @@ import java.time.Duration;
 import java.util.concurrent.locks.Condition;
 
 public abstract class BasePage {
-    protected WebDriver driver;
-    protected String pageUrl;
+    protected static WebDriver driver;
+    protected static String pageUrl;
     protected WebDriverWait webDriverWait;
 
     public BasePage(WebDriver driver) {

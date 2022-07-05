@@ -6,7 +6,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MailinatorPage extends BasePage {
+public abstract class MailinatorPage extends BasePage {
 
     private By lastLetter = By.xpath("//td[contains(text(), 'qwerty')]");
     private By inboxField = By.id("inbox_field");
@@ -65,5 +65,7 @@ public class MailinatorPage extends BasePage {
     public void clickOnLastReceivedLetter() {
 
     }
+
+    protected abstract String pageUrl();
 }
 

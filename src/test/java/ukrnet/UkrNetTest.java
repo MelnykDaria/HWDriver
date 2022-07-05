@@ -11,6 +11,8 @@ import pages.Loginpage;
 import pages.MailinatorPage;
 import testdata.User;
 
+import static pages.Loginpage.login;
+
 public class UkrNetTest {
 
     private WebDriver driver;
@@ -57,6 +59,5 @@ public class UkrNetTest {
         mailinatorPage.clickOnLastReceivedLetter();
 
     }
-
-
 }
+
