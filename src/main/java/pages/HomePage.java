@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.regex.Pattern;
 
-public abstract class HomePage extends BasePage
+public class HomePage extends BasePage
 {
 
     private By writeLetterButton = By.cssSelector(".primary.compose");

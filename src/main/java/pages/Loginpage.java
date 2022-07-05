@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import testdata.User;
 
-    public abstract class Loginpage extends BasePage {
+    public class Loginpage extends BasePage {
 
         private By loginField = By.name("login");
         private By passwordField = By.cssSelector("[name='password']");
