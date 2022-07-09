@@ -14,6 +14,10 @@ public abstract class MailinatorPage extends BasePage {
     private By mailinatorSearchFieldLocator = By.xpath("//input[@id='search']");
     private By mailinatorGoButtonLocator = By.xpath("//button[text()='GO']");
     private By lastReceivedEmailLocator = By.xpath("//table[@class='table-striped jambo_table']//tbody//tr[1]");
+    private By accessToEmailBodyLocator = By.id("html_msg_body");
+    private By mailinatorLetterLocator = By.xpath("//span[@class='xfmc1']");
+    private By mailSubjectLocator = By.xpath("//div[@class='fz-20 ff-futura-demi gray-color ng-binding']");
+    private By emailSenderLocator = By.xpath("//div[@class='wrapper-info-title d-flex']//div[contains(text(),'testselenium1@ukr.net')]");
 
     public MailinatorPage(WebDriver driver) {
         super(driver);
@@ -51,7 +55,7 @@ public abstract class MailinatorPage extends BasePage {
 
     public void navigate() {
         driver.get(pageUrl);
-
+        pageUrl = "https://www.mailinator.com/";
     }
 
     public void inputMailinatorEmail() {
@@ -63,9 +67,26 @@ public abstract class MailinatorPage extends BasePage {
     }
 
     public void clickOnLastReceivedLetter() {
-
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(lastReceivedEmailLocator));
+        driver.findElement(lastReceivedEmailLocator).click();
+    }
+    public String getSenderEmail() {
+        return driver.findElement(emailSenderLocator).getText();
     }
 
-    protected abstract String pageUrl();
+    public String getTextFromReceivedMailOnMailinator()
+    {
+        try {
+            driver.switchTo().frame(driver.findElement(accessToEmailBodyLocator));
+            return driver.findElement(mailinatorLetterLocator).getText();
+        }
+        finally
+        {
+            driver.switchTo().parentFrame();
+        }
+    }
+    public String getMailSubjectText() {
+        return driver.findElement(mailSubjectLocator).getText();
+    }
 }
 
