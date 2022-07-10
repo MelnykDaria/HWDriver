@@ -3,28 +3,38 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import testdata.User;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-    public abstract class Loginpage extends BasePage {
 
-        private static By loginField = By.name("login");
-        private static By passwordField = By.cssSelector("[name='password']");
-        private static By submitButton = By.cssSelector("[type='submit']");
+    public  class Loginpage extends BasePage {
+
+      @FindBy(name = "login")
+      private WebElement loginField;
+
+      @FindBy(css = "[name='password']")
+      private static WebElement passwordField;
+
+      @FindBy(css = "[type='submit']")
+      private WebElement submitButton;
 
         public Loginpage(WebDriver driver) {
             super(driver);
-            pageUrl="https://mail.ukr.net/";
+            pageUrl = "https://mail.ukr.net/";
+            PageFactory.initElements(driver, this);
         }
-        public static void navigate()
-        {
+
+        public void navigate() {
             driver.get(pageUrl);
         }
 
-        public static void login(User user) {
-            driver.findElement(loginField).sendKeys(user.getLogin());
-            driver.findElement(passwordField).sendKeys(user.getPassword());
-            driver.findElement(submitButton).click();
+        public void login(User user)
+        {
+            loginField.sendKeys(user.getLogin());
+            passwordField.sendKeys(user.getPassword());
+            submitButton.click();
         }
 
-        protected abstract String pageUrl();
     }
 
