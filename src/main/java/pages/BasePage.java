@@ -18,7 +18,8 @@ public abstract class BasePage {
     }
 
 private String pageUrl() {
-            return pageUrl;
+
+        return pageUrl;
 }
     public void waitUntilLoaded() {
         new WebDriverWait(driver, Duration.ofSeconds(4)).until(ExpectedConditions.urlContains(pageUrl));
