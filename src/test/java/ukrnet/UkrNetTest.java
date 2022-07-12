@@ -11,7 +11,7 @@ import pages.Loginpage;
 import pages.MailinatorPage;
 import testdata.User;
 
-import static pages.Loginpage.login;
+
 
 public class UkrNetTest {
 
@@ -31,33 +31,25 @@ public class UkrNetTest {
     @Test
     public void sendEmailToMailinatorTest() {
         User user = new User(senderEmail, senderEmailPassword);
-        Loginpage loginPage = new Loginpage(driver) {
-            @Override
-            protected String pageUrl() {
-                return null;
-            }
-        };
-        loginPage.navigate();
-        loginPage.login(user);
+        Loginpage Loginpage = new Loginpage(driver);
+        Loginpage.navigate();
+        Loginpage.login(user);
         HomePage homePage = new HomePage(driver);
-        homePage.waitUntilLoaded();
-        MailinatorPage mailinatorPage = new MailinatorPage(driver) {
-            @Override
-            protected String pageUrl() {
-                return null;
-            }
-        };
-
+        HomePage.waitUntilLoaded();
+        MailinatorPage mailinatorPage = new MailinatorPage(driver);
         homePage.clickWriteLetter();
         homePage.writeLetter(receiverMailinatorEmail, mailSubject, mailText);
         homePage.sendLetter();
-        Assert.assertTrue(homePage.getTextLetterIsSend("Ваш лист надіслано"));
         mailinatorPage.navigate();
-        mailinatorPage.goToInbox("testselenium1");
+        mailinatorPage.goToInbox();
         mailinatorPage.inputMailinatorEmail();
         mailinatorPage.clickGoButton();
         mailinatorPage.clickOnLastReceivedLetter();
+        Assert.assertEquals(mailSubject, mailinatorPage.getMailSubjectText());
+        Assert.assertEquals(senderEmail, mailinatorPage.getSenderEmail());
+        Assert.assertEquals(mailText, mailinatorPage.getTextFromReceivedMailOnMailinator());
+            }
+        }
 
-    }
-}
+
 
